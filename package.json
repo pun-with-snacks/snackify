@@ -9,6 +9,7 @@
     "build": "webpack -w",
     "start:dev": "webpack-dev-server --hot",
     "webpack": "webpack && npm start"
+
   },
   "repository": {
     "type": "git",
