@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(express.static('build'));
+app.use(express.static('.'));
 
 app.use('/auth', authRoutes);
 
