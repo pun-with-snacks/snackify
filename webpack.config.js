@@ -8,7 +8,7 @@ module.exports = {
     //where webpack is outputing normal build
     output:{
         path: path.resolve(__dirname, 'build'), 
-        filename: 'bundle.js'
+				filename: 'bundle.js',
     },
     //loaders and modules that webpack will need to read your specific files
     module:{
@@ -35,8 +35,8 @@ module.exports = {
         ]
     }, 
     devServer:{
-        publicPath: "/build/",
-        hot: true,
-        port: 8080
+			publicPath: "/build/",
+			hot: true,
+			port: 8080
     }
 }

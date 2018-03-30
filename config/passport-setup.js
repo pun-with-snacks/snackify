@@ -19,7 +19,7 @@ passport.use(
 		callbackURL: '/auth/github/redirect',
 		clientID: keys.github.clientID,
 		clientSecret: keys.github.clientSecret,
-	}, () => {
-		
+	}, (accessToken, refreshToken, profile, done) => {
+		console.log(profile);
 	}
 ));
