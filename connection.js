@@ -12,10 +12,10 @@ var config = {
 }
 
 //Generating pool API
-var pool = new pg.Pool(config)
+var pool = new pg.Pool(config);
 let db;
 
-pool.connect(uri, (err, result) => {
+pool.connect((err, result) => {
   if (err){
     throw new Error(err);
   }else{
