@@ -5,11 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Server.js",
-    "build": "webpack -w",
-    "start:dev": "webpack-dev-server --hot",
-    "webpack": "webpack && npm start"
-
+    "start": "node server.js",
+    "build": "webpack && npm start",
+    "start:dev": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",

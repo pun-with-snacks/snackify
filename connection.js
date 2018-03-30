@@ -29,7 +29,7 @@ var config = {
 // };
 
 //Generating pool API
-var pool = new pg.Pool(config)
+var pool = new pg.Pool(config);
 let db;
 
 pool.connect((err, result) => {
