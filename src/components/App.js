@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './header';
 import SubmissionForm from './submission-form';
+import PhotoGallery from './photoGallery';
 
 class App extends Component{
 
@@ -10,6 +11,7 @@ class App extends Component{
             <div>
                 <Header id='header' />
                 <SubmissionForm />
+                <PhotoGallery />
             </div>
         );
     }
