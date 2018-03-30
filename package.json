@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/troutman21/Snackify/issues"
   },
-  "homepage": "https://github.com/troutman21/Snackify#readme"
+  "homepage": "https://github.com/troutman21/Snackify#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  }
 }
