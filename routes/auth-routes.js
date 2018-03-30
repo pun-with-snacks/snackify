@@ -16,10 +16,10 @@ router.get('/google/redirect', (req, res) => {
 })
 
 router.get('/github', passport.authenticate('github', {
-	scope: ['user']
+	scope: ['profile']
 }));
 
-router.get('/github/redirect', (req, res) => {
+router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
 	res.send('you reached the CB URI for GITHUB');
 })
 
