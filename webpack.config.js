@@ -37,6 +37,6 @@ module.exports = {
     devServer:{
         publicPath: "/build/",
         hot: true,
-        port: 8081
+        port: 8080
     }
 }

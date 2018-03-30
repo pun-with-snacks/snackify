@@ -8,9 +8,7 @@
     "start": "node Server.js",
     "build": "webpack -w",
     "start:dev": "webpack-dev-server --hot",
-    "webpack": "webpack -w npm start",
-    "test-connection": "node connection.js",
-    "test-server": "node Server.js"
+    "webpack": "webpack && npm start"
   },
   "repository": {
     "type": "git",
@@ -27,9 +25,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
     "passport-google-oauth20": "^1.0.0",
     "path": "^0.12.7",
     "pg": "^7.4.1",
