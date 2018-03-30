@@ -1,5 +1,5 @@
 node_modules
 package-lock.json
-bundle.js
+build/bundle.js
 webpack.config.js
 README.md 
