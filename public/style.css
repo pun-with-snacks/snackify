@@ -62,3 +62,16 @@ header ul li{
 #submissionForm h1  {
     text-decoration: underline,
 }
+
+#photoGallery{
+    padding:30px;
+    border: 1px solid darkgray;
+    border-radius: 5px;  
+    margin: 10px
+
+}
+
+.entryImg{
+    width: 25%;
+    height: auto;
+}
