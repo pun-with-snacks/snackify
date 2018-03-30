@@ -5,10 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node S erver.js",
-    "build": "webpack -w",
-    "start:dev": "webpack-dev-server --hot",
-    "webpack": "webpack -w && npm start"
+    "start": "node server.js",
+    "build": "webpack -w && npm start",
+    "start:dev": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,8 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth20": "^1.0.0",
     "path": "^0.12.7",
+    "pg": "^7.4.1",
+    "pg-format": "^1.0.4",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "style-loader": "^0.20.3",
