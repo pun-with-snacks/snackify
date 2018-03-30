@@ -5,9 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node Server.js",
     "build": "webpack -w",
-    "start:dev": "webpack-dev-server --hot"
+    "start:dev": "webpack-dev-server --hot",
+    "webpack": "webpack -w npm start",
+    "test-connection": "node connection.js",
+    "test-server": "node Server.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +29,11 @@
     "body-parser": "^1.18.2",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "path": "^0.12.7",
     "pg": "^7.4.1",
+    "pg-format": "^1.0.4",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "style-loader": "^0.20.3",
