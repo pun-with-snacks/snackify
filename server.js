@@ -16,8 +16,8 @@ const app = express();
 app.use('/build', express.static(path.join(__dirname, 'build')));
 // app.use('/public', express.static('public'));
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : true}));
 app.use(cookieSession({
 	maxAge: 24 * 60 * 60 * 1000,
 	keys: [keys.session.cookieKey]
@@ -59,16 +59,34 @@ pool.connect((err, result) => {
 		else res.redirect('/login');
 	});
 
-	app.post('/', (req, res) => {
-		console.log(req.body);
-		db.query(`UPDATE snackify SET submissionCount = submissionCount -1 WHERE "userName" = '${req.body.userName}';
+	app.post('/submission', (req, res) => {
+		db.query(`SELECT submissionCount from snackify where "userName" = '${req.body.userName}';`, (err, count) => {
+			if (count.rows[0].submissioncount === 0) {
+				res.send('You Eat Too Much');
+			} else {
+				db.query(`UPDATE snackify SET submissionCount = submissionCount -1 WHERE "userName" = '${req.body.userName}';
 				  UPDATE snackify SET snackphoto = '${req.body.snackPhoto}' WHERE "userName" = '${req.body.userName}';
 				  UPDATE snackify SET comments = '${req.body.comments}' WHERE "userName" = '${req.body.userName}';`,
-			(err, result) => {
-				if (err) throw new Error(err);
-				res.send('successfully posted');
-			});
+					(err, result) => {
+						if (err) throw new Error(err);
+						res.send('successfully posted');
+					});
+			}
+		});
+
 	})
+
+	app.post('/gallery', (req,res)=>{
+		db.query(`SELECT "userName" FROM snackify WHERE snackphoto IS NOT NULL;
+							SELECT snackphoto FROM snackify;
+							SELECT votes FROM snackify WHERE snackphoto IS NOT NULL;
+							SELECT comments FROM snackify WHERE snackphoto IS NOT NULL;
+							`,(err,result)=>{
+				if(err){
+						throw new Error(err)
+				}
+		});
+}) 
 
 	//=================================================================
 

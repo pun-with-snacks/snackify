@@ -7,8 +7,8 @@ class CurrentUser extends Component {
             <div id='currentUserDiv'>
                  {/*this needs to pull in getHub avatar */}
                 {/* and user name */}
-                <img id='currentUserImage' src='https://goo.gl/N25pkS' />
-                <div id='currentUserName' >username</div>
+                <img id='currentUserImage' src={this.props.avatar} />
+                <div id='currentUserName' >{this.props.userName}</div>
             </div>
         );
     }

@@ -5,20 +5,25 @@ class SubmissionForm extends Component {
 		super(props)
 		this.submitEntry = this.submitEntry.bind(this);
 	}
+	
 
 	submitEntry(e) {
-		e.preventDefault();
-		console.log('submitEntry clicked'+this.props.userName);
-		fetch('/', {
+		const imageInput = document.getElementById('imageinput').value;
+		const commentInput = document.getElementById('commentinput').value;
+		fetch('/submission', {
 			method: 'POST',
-			headers: { 'content-type': 'application/json' },
-			body: {
-				snackPhoto: document.getElementById('imageinput').value,
-				comments: document.getElementById('commentinput').value,
-				userName: this.props.userName,
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type': 'application/json',
 			},
+			body: JSON.stringify({
+				snackPhoto: imageInput,
+				comments: commentInput,
+				userName: this.props.userName,
+			}),
 		}).then(res => console.log(res))
 			.catch(err => err);
+		location.reload();
 	}
 
 
@@ -29,7 +34,7 @@ class SubmissionForm extends Component {
 				{/* add action and method!!!! */}
 				Image: <input id="imageinput" type='text' name='image' /> <br />
 				Comment: <input id="commentinput" type='text' name='comment' /> <br />
-				<button type='submit' onClick={this.submitEntry} > Add Snack </button>
+				<button type='submit' onClick={(e)=>{this.submitEntry(e)}} > Add Snack </button>
 			</div>
 		);
 	}
