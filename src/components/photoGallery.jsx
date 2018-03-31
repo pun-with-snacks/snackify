@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Entry from './entry';
+import Entry from './entry.jsx';
 
 class PhotoGallery extends Component {
 

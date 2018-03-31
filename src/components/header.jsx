@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CurrentUser from './current-user'; 
+import CurrentUser from './current-user.jsx'; 
 class Header extends Component {
 
     render() {
