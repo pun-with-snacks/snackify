@@ -84,28 +84,42 @@ pool.connect((err, result) => {
 
 
 	app.post('/submission',(req,res)=>{
-		db.query(`UPDATE snackify SET submissionCount = submissionCount -1 WHERE '${req.user.userName}';`, (err,result)=>{
+		db.query(`UPDATE snackify SET submissionCount = submissionCount -1 WHERE '${req.user.userName}';
+				  UPDATE snackify SET snackphoto = '${req.user.snackphoto} WHERE '${req.user.userName}';
+				  UPDATE snackify SET comments = '${req.user.comments}' WHERE '${req.user.userName}'`, 
+		(err,result)=>{
 			if(err){
 				throw new Error(err)
 			}
 		});
-		db.query(`UPDATE snackify SET snackphoto = '${req.user.snackphoto} WHERE '${req.user.userName}';`, (err,result)=>{
-			if(err){
-				throw new Error(err)
-			}
-		});	
-		db.query(`UPDATE snackify SET comments = '${req.user.comments}' WHERE '${req.user.userName}';`, (err,result)=>{
+		// db.query(`UPDATE snackify SET snackphoto = '${req.user.snackphoto} WHERE '${req.user.userName}';`, (err,result)=>{
+		// 	if(err){
+		// 		throw new Error(err)
+		// 	}
+		// });	
+		// db.query(`UPDATE snackify SET comments = '${req.user.comments}' WHERE '${req.user.userName}';`, (err,result)=>{
+		// 	if(err){
+		// 		throw new Error(err)
+		// 	}
+		// });
+	});
+
+	app.post('Populating Front End with stuff',(req,res)=>{
+		db.query(`UPDATE snackify SET submissionCount = submissionCount -1 WHERE '${req.user.userName}';
+				  UPDATE snackify SET snackphoto = '${req.user.snackphoto} WHERE '${req.user.userName}';
+				  UPDATE snackify SET comments = '${req.user.comments}' WHERE '${req.user.userName}'`, 
+		(err,result)=>{
 			if(err){
 				throw new Error(err)
 			}
 		});
+
+
+	}) 
+
 
 	app.listen(3000, () => {
 		console.log('listening on port 3000...');
-	});
-
-	
-	
 	});
 
 	// app.post('/submission',(req,res)=> {
