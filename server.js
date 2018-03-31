@@ -76,17 +76,27 @@ pool.connect((err, result) => {
 
 	})
 
-	app.post('/gallery', (req,res)=>{
+	app.get('/gallery', (req, res) => {
 		db.query(`SELECT "userName" FROM snackify WHERE snackphoto IS NOT NULL;
-							SELECT snackphoto FROM snackify;
+							SELECT snackphoto FROM snackify WHERE snackphoto IS NOT NULL;
 							SELECT votes FROM snackify WHERE snackphoto IS NOT NULL;
 							SELECT comments FROM snackify WHERE snackphoto IS NOT NULL;
-							`,(err,result)=>{
-				if(err){
-						throw new Error(err)
-				}
-		});
-}) 
+							`, (err, result) => {
+								const resultArr = [];
+								const rows = result.map((col) => {
+									return col.rows;
+								})
+								for(let i = 0 ; i < rows[0].length; i++){
+										const userObj = {};
+										userObj.userName = rows[0][i];
+										userObj.snackPhoto = rows[1][i];
+										userObj.votes = rows[2][i];
+										userObj.comments = rows[3][i];
+										resultArr.push(userObj);
+								}
+								res.json(resultArr);			
+			});
+	})
 
 	//=================================================================
 
@@ -95,9 +105,27 @@ pool.connect((err, result) => {
 	})
 
 	app.get('/test', (req, res) => {
-		res.json(req.user);
-		// res.sendFile(path.join(__dirname, 'index.html'));
-		// res.send(`this is my body ${req.user} `); 
+		db.query(`SELECT "userName" FROM snackify WHERE snackphoto IS NOT NULL;
+							SELECT snackphoto FROM snackify WHERE snackphoto IS NOT NULL;
+							SELECT votes FROM snackify WHERE snackphoto IS NOT NULL;
+							SELECT comments FROM snackify WHERE snackphoto IS NOT NULL;
+							`, (err, result) => {
+								const resultArr = [];
+								const rows = result.map((col) => {
+									return col.rows;
+								})
+								for(let i = 0 ; i < rows[0].length; i++){
+										const userObj = {};
+										userObj.userName = rows[0][i].userName;
+										userObj.snackPhoto = rows[1][i].snackphoto;
+										userObj.votes = rows[2][i].votes;
+										userObj.comments = rows[3][i].comments;
+										resultArr.push(userObj);
+								}
+								req.user = JSON.parse(req.user);
+								req.user.gallery = resultArr;	
+								res.json(req.user);	
+			});
 	});
 
 

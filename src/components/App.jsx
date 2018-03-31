@@ -15,20 +15,19 @@ class App extends Component{
         fetch('/test', {credentials: "same-origin"})
         .then(response => response.json())
         .then(myJson => {
-					this.setState(JSON.parse(myJson));
+					// console.log(myJson);
+					this.setState(myJson);
+					console.log(this.state + "<==== this.state");
         })
 				.catch(err => console.log(err));
-				fetch('/gallery', {credentials: "same-origin"})
-				.then(res => res.json())
-				.then(myJson => {
-					const gallery = [];
-					myJson = JSON.parse(myJson);
-					for( key in myJson) {
-						gallery.push(myJson.key)
-					}
-					this.setState({gallery});
-				})
 				
+				// fetch('/gallery', {credentials: "same-origin"})
+				// .then(res => res.json())
+				// .then(myJson => {
+				// 	console.log(myJson);	
+				// 	this.setState({gallery: myJson});
+				// 	console.log(this.state);
+				// })
     }
 
     render(){
@@ -36,7 +35,7 @@ class App extends Component{
             <div>
                 <Header id='header' userName={this.state.userName}  avatar={this.state.avatar} />
                 <SubmissionForm userName={this.state.userName} />
-                <PhotoGallery />
+                <PhotoGallery gallery={this.state.gallery} />
                 <Footer />
             </div>
         );
