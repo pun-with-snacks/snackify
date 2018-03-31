@@ -75,3 +75,8 @@ header ul li{
     width: 25%;
     height: auto;
 }
+
+#footer{
+    background-color: black; 
+    color: white;
+}

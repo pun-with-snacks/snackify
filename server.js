@@ -7,10 +7,12 @@ const pg = require('pg');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
-
 const app = express();
+const cookieParser = require('cookie-parser'); 
 
-app.use(express.static('.'));
+
+app.use('/build',express.static(path.join(__dirname, 'build')));
+app.use(express.static('public'));
 
 
 app.use(cookieSession({
@@ -19,8 +21,6 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 
 let user = 'ulurpczi';
@@ -39,25 +39,38 @@ let db;
 
 pool.connect((err, result) => {
   if (err) throw new Error(err);
-  else console.log("Connecting to DB"); 
+  else console.log("Connecting to DB..."); 
 	db = result;
 
 	app.use('/auth', authRoutes);
 
-	app.get('/', (req, res) => {
-		res.sendFile(path.join(__dirname, 'index.html'));
-	})
 
-	app.get('/test', (req, res) => {
-		// db.query('SELECT * from snackify;', (err, result) => {
-		// 	if(err) throw err;
-		// 	res.send(result);
-		// });
-		res.send(req.user);
+	////////////////
+	//////home/////
+	///////////////
+
+	app.get('/', (req, res) => {
+		if(req.user) res.sendFile(path.join(__dirname, 'index.html'));
+		else res.redirect('/login');
+	});
+	
+	//=================================================================
+
+	app.get('/login', (req, res) => {
+		res.sendFile(path.join(__dirname, 'login.html'));
 	})
+	
+	app.get('/test', (req, res) => {
+		res.send(req.user); 
+		// res.sendFile(path.join(__dirname, 'index.html'));
+		// res.send(`this is my body ${req.user} `); 
+	}); 
+
+
+
 
 	app.listen(3000, () => {
-		console.log('listening on port 3000');
+		console.log('listening on port 3000...');
 	});
 
 })
