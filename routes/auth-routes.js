@@ -21,7 +21,7 @@ router.get('/github', passport.authenticate('github', {
 
 router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
 	//req.user contains userinfo
-	res.send(req.user);
+	res.redirect('/test');
 })
 
 router.get('/logout', (req, res) => {

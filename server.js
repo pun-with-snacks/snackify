@@ -41,13 +41,6 @@ pool.connect((err, result) => {
   if (err) throw new Error(err);
   else console.log("Connecting to DB"); 
 	db = result;
-  // db.query('SELECT * FROM snackify;', (err, result) => {
-  //     if(err){
-  //         throw new Error(err)
-  //     }
-  //   console.log('------>Looking for rows', result.rows);
-  //   db.end();
-	// });
 
 	app.use('/auth', authRoutes);
 
@@ -56,10 +49,11 @@ pool.connect((err, result) => {
 	})
 
 	app.get('/test', (req, res) => {
-		db.query('SELECT * from snackify;', (err, result) => {
-			if(err) throw err;
-			res.send(result);
-		});
+		// db.query('SELECT * from snackify;', (err, result) => {
+		// 	if(err) throw err;
+		// 	res.send(result);
+		// });
+		res.send(req.user);
 	})
 
 	app.listen(3000, () => {
