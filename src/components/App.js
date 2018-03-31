@@ -7,14 +7,15 @@ import Footer from './footer';
 class App extends Component{
     constructor(props) {
         super(props)
-        this.state = {};
+        this.state = {
+				};
     }
 
     componentDidMount() {
-        console.log(`componentDidMount fired!!!`);
+        console.log(`componentDidMount fired!!! `);
         fetch('/test', {credentials: "same-origin"})
-        .then(response => response.json())
-        .then(response => console.log(response))
+				.then(response => response.json())
+				.then(json => this.setState({userName: json.userName}))
         .catch(err => console.log(err)); 
     }
 
