@@ -4,10 +4,24 @@ const passportSetup = require('./config/passport-setup');
 const path = require('path');
 const cors = require('cors');
 const pg = require('pg');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const keys = require('./config/keys');
 
 const app = express();
 
 app.use(express.static('.'));
+
+
+app.use(cookieSession({
+	maxAge: 24*60*60*1000,
+	keys: [keys.session.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 
 let user = 'ulurpczi';
 let pass = 'TVQxxaVGcvh2ZFlNZHXaHReKN_3DfZbm';

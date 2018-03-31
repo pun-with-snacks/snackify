@@ -20,7 +20,8 @@ router.get('/github', passport.authenticate('github', {
 }));
 
 router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
-	res.send('you reached the CB URI for GITHUB');
+	//req.user contains userinfo
+	res.send(req.user);
 })
 
 router.get('/logout', (req, res) => {
