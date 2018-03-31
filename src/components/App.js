@@ -10,6 +10,14 @@ class App extends Component{
         this.state = {};
     }
 
+    componentDidMount() {
+        console.log(`componentDidMount fired!!!`);
+        fetch('/test', {credentials: "same-origin"})
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.log(err)); 
+    }
+
     render(){
         return (
             <div>

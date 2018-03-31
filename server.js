@@ -7,10 +7,11 @@ const pg = require('pg');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
-
 const app = express();
+const cookieParser = require('cookie-parser'); 
 
-app.use(express.static('.'));
+
+app.use('/build',express.static(path.join(__dirname, 'build')));
 
 
 app.use(cookieSession({
@@ -19,8 +20,6 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 
 let user = 'ulurpczi';
@@ -39,9 +38,11 @@ let db;
 
 pool.connect((err, result) => {
   if (err) throw new Error(err);
-  else console.log("Connecting to DB"); 
+  else console.log("Connecting to DB..."); 
 	db = result;
-  // db.query('SELECT * FROM snackify;', (err, result) => {
+ 
+//old query(just for reference)	
+// db.query('SELECT * FROM snackify;', (err, result) => {
   //     if(err){
   //         throw new Error(err)
   //     }
@@ -51,19 +52,41 @@ pool.connect((err, result) => {
 
 	app.use('/auth', authRoutes);
 
+
+	////////////////
+	//////home/////
+	///////////////
+
 	app.get('/', (req, res) => {
+		console.log(req.user, 'from the home route'); 
 		res.sendFile(path.join(__dirname, 'index.html'));
-	})
+	});
+
+
+	//=================================================================
+	
+	app.get('/currentuser', (req, res) =>{
+		//make request to DB and for req.user value and send to client
+		res.send('example Data'); 
+	});
+	
+	//=================================================================
+
+
 
 	app.get('/test', (req, res) => {
-		db.query('SELECT * from snackify;', (err, result) => {
-			if(err) throw err;
-			res.send(result);
-		});
-	})
+		console.log(req.session, 'req.session from test');
+		console.log(req.user, 'im from the /test'); 
+		res.send(req.user); 
+		// res.sendFile(path.join(__dirname, 'index.html'));
+		// res.send(`this is my body ${req.user} `); 
+	}); 
+
+
+
 
 	app.listen(3000, () => {
-		console.log('listening on port 3000');
+		console.log('listening on port 3000...');
 	});
 
 })

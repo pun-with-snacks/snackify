@@ -26,14 +26,14 @@ pool.connect((err, result) => {
 	//////////////////////////////////////////////
 	passport.serializeUser((user, done) => {
 		// maybe id if _id undefined
-		console.log(user+'<====serializer');
+		// console.log(user+'<====serializer');
 		done(null, user);
 		// 'phillip
 	})
 
 	passport.deserializeUser((id, done) => {
 		//find _id that matches id 
-		console.log(id+'<=====deserializer');
+		// console.log(id+'<=====deserializer');
 		done(null, id);
 	})
 
