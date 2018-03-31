@@ -14,14 +14,18 @@ class App extends Component{
         console.log(`componentDidMount fired!!!`);
         fetch('/test', {credentials: "same-origin"})
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(myJson => {
+            console.log(myJson);
+            this.setState(myJson)
+            console.log(this.state, 'state!!!'); 
+        })
         .catch(err => console.log(err)); 
     }
 
     render(){
         return (
             <div>
-                <Header id='header' />
+                <Header id='header' userName={this.state.userName}  avatar={this.state.avatar} />
                 <SubmissionForm />
                 <PhotoGallery />
                 <Footer />
