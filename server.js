@@ -9,8 +9,8 @@ const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
 const app = express();
+const port = process.env.PORT || 3000; // for heroku hosting
 
 
 app.use('/build', express.static(path.join(__dirname, 'build')));
@@ -144,8 +144,8 @@ pool.connect((err, result) => {
 
 
 
-	app.listen(3000, () => {
-		console.log('listening on port 3000...');
+	app.listen(port, () => {
+		console.log(`listening on port ${port}...`);
 	});
 
 })
