@@ -10,8 +10,8 @@ const keys = require('./config/keys');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const app = express();
-const port = process.env.PORT || 3000; // for heroku hosting
-
+const port = 3000; // @todo: update to be `process.env.PORT || 3000;` for external/heroku hosting
+const dbConfig = require('./db-config.js');
 
 app.use('/build', express.static(path.join(__dirname, 'build')));
 // app.use('/public', express.static('public'));
@@ -30,26 +30,12 @@ app.use(passport.session());
 // NOTE: for tracking user sessions
 app.use(cookieParser());
 
-
-
-let user = 'ulurpczi';
-let pass = 'TVQxxaVGcvh2ZFlNZHXaHReKN_3DfZbm';
-let config = {
-	host: "nutty-custard-apple.db.elephantsql.com",
-	user: user,
-	password: pass,
-	database: user,
-	post: 5432,
-	ssl: true
-}
 //Generating pool API
-let pool = new pg.Pool(config);
-let db;
-
+const pool = new pg.Pool(dbConfig);
 pool.connect((err, result) => {
 	if (err) throw new Error(err);
 	else console.log("Connecting to DB...");
-	db = result;
+	const db = result;
 
 	app.use('/auth', authRoutes);
 
