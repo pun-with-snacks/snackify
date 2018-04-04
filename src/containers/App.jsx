@@ -17,6 +17,10 @@ class App extends Component {
     };
   };
 
+  changeUser() {
+
+  }
+  
   componentDidMount () {
       console.log(`componentDidMount fired!!! `);
       fetch('/test', {credentials: "same-origin"})

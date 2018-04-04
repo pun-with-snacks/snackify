@@ -11,7 +11,7 @@ CREATE TABLE "User" (
 CREATE TABLE "FoodItem" (
 	"_id" serial NOT NULL,
 	"foodName" TEXT NOT NULL,
-	" imgUrl" TEXT NOT NULL,
+	"imgUrl" TEXT NOT NULL,
 	"price" FLOAT NOT NULL,
 	"itemVotes" integer NOT NULL,
 	"inCart" BOOLEAN NOT NULL,

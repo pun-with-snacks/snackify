@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Item from './Item.jsx';
 
 
@@ -21,4 +22,4 @@ const FoodBank = props => {
 }
 
 
-export default Cart;
+export default FoodBank;
