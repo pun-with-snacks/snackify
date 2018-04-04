@@ -32,7 +32,7 @@ pool.connect((err, result) => {
 	})
 
 	passport.deserializeUser((id, done) => {
-		//find _id that matches id 
+		//find _id that matches id
 		// console.log(id+'<=====deserializer');
 		done(null, id);
 	})
@@ -56,19 +56,19 @@ pool.connect((err, result) => {
 			clientSecret: keys.github.clientSecret,
 		}, (accessToken, refreshToken, profile, done) => {
 			console.log('hit passport github');
-			db.query(`SELECT "userName" from snackify where "userName" = '${profile.username}';`, (err, result) => {
+			db.query(`SELECT "gitHandle" from User where "gitHandle" = '${profile.username}';`, (err, result) => {
 				if (err) throw err;
 				if (!result.rows[0]) {
 					console.log('hit line 59');
-					db.query(`INSERT into snackify ("userName", avatar, voteCount, submissionCount) 
-					VALUES ('${profile.username}', '${profile.photos[0].value}',${3}, ${1});`, (err, user) => {
+					db.query(`INSERT INTO User (gitHandle, votesRemaining, electsRemaining, isAdmin)
+					VALUES ('${profile.username}', ${3}, ${1}, ${false});`, (err, user) => {
 							if (err) console.log('Im the error from insert ' + err);
-							db.query(`SELECT * from snackify where "userName" = '${profile.username}';`, (err, user) => {
-								done(null, user.rows[0].userName);
+							db.query(`SELECT * FROM User WHERE "gitHandle" = '${profile.username}';`, (err, user) => {
+								done(null, user.rows[0].gitHandle);
 							});
 						});
 				} else {
-					db.query(`SELECT * from snackify where "userName" = '${profile.username}';`, (err, user) => {
+					db.query(`SELECT * FROM User WHERE gitHandle = '${profile.username}';`, (err, user) => {
 						done(null, JSON.stringify(user.rows[0]));
 					});
 				}
