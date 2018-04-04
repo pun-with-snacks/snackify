@@ -8,12 +8,10 @@ const FoodBank = props => {
 
   if (this.props.bank) {
     for (let i = 0; i < this.props.bank.length; i++) {
-        cartItems.push(<Item key={ i } item={ this.props.bank[i] } />);
-      }
+      cartItems.push(<Item key={ i } item={ this.props.bank[i] } />);
     }
-  } else {
-    bankItems.push(<div></div>)
-  }
+  } else bankItems.push(<div></div>)
+
 
   return (
     <div id='bank'>

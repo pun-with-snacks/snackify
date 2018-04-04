@@ -2,6 +2,7 @@ CREATE TABLE "User" (
 	"gitHandle" TEXT NOT NULL UNIQUE,
 	"gitAvatar" bytea NOT NULL,
 	"votesRemaining" integer NOT NULL UNIQUE,
+	"isAdmin" BOOLEAN NOT NULL,
 	CONSTRAINT User_pk PRIMARY KEY ("gitHandle")
 ) WITH (
   OIDS=FALSE
@@ -19,26 +20,26 @@ CREATE TABLE "FoodItem" (
   OIDS=FALSE
 );
 
-CREATE TABLE "userToItem" (
+CREATE TABLE "UserToItem" (
+	"_id" serial NOT NULL,
+	"firstVoterGitHandle" TEXT NOT NULL,
 	"foodItemId" integer NOT NULL,
-	"firstVoterGitHandle" TEXT NOT NULL
+	CONSTRAINT UserToItem_pk PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE "Admin" (
-	"gitHandle" serial NOT NULL,
+CREATE TABLE "WeeklyRules" (
+	"_id" integer NOT NULL,
 	"budget" FLOAT NOT NULL,
-	"userVotes" integer NOT NULL,
+	"votesPerUser" integer NOT NULL,
 	"startTime" integer NOT NULL,
 	"endTime" integer NOT NULL,
-	CONSTRAINT Admin_pk PRIMARY KEY ("gitHandle")
+	CONSTRAINT WeeklyRules_pk PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
 
-ALTER TABLE "userToItem" ADD CONSTRAINT "userToItem_fk0" FOREIGN KEY ("foodItemId") REFERENCES "FoodItem"("_id");
-ALTER TABLE "userToItem" ADD CONSTRAINT "userToItem_fk1" FOREIGN KEY ("firstVoterGitHandle") REFERENCES "User"("gitHandle");
-
-ALTER TABLE "Admin" ADD CONSTRAINT "Admin_fk0" FOREIGN KEY ("gitHandle") REFERENCES "User"("gitHandle");
+ALTER TABLE "UserToItem" ADD CONSTRAINT "UserToItem_fk0" FOREIGN KEY ("firstVoterGitHandle") REFERENCES "User"("gitHandle");
+ALTER TABLE "UserToItem" ADD CONSTRAINT "UserToItem_fk1" FOREIGN KEY ("foodItemId") REFERENCES "FoodItem"("_id");

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import Header from './Header.jsx';
+import Header from '../components/Header.jsx';
 import Dashboard from './Dashboard.jsx';
 
 
 class App extends Component {
 
   // NOTE: only keep track of user's state here
-  constructor () {
+  constructor (props) {
+    super(props)
     this.state = {
       currUser: {
         gitHandle: 'back2bas1cs',

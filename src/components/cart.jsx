@@ -9,8 +9,7 @@ const Cart = props => {
 
   if (this.props.cart) {
     for (let i = 0; i < this.props.cart.length; i++) {
-        cartItems.push(<Item key={ i } item={ this.props.cart[i] } />);
-      }
+      cartItems.push(<Item key={ i } item={ this.props.cart[i] } />);
     }
   } else {
     cartItems.push(<div></div>)

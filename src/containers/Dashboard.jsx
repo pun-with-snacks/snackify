@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Cart from './Cart.jsx';
-import FoodBank from './FoodBank.jsx';
+import Cart from '../components/Cart.jsx';
+import FoodBank from '../components/FoodBank.jsx';
 import SubmissionForm from './SubmissionForm.jsx';
 
 class Dashboard extends Component {
