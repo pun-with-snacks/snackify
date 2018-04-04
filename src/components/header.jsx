@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import CurrentUser from './current-user.jsx';
-class Header extends Component {
 
-    render () {
-        return (
-            <header>
-                <div id='logo'>Snackify</div>
-                <ul>
-                {/* need link href to logout route!!! */}
-                {/* Need to build user component */}
-                    <li><a href="#">Logout</a></li>
-                    <li><CurrentUser userName={ this.props.userName } avatar={ this.props.avatar }/></li>
-                </ul>
-            </header>
-        );
-    }
+import CurrentUser from './CurrentUser.jsx';
+
+
+const Header = props => {
+
+  return (
+    <header>
+      <div id='title'>CS SNACK TIME</div>
+      <ul>
+      {/* need link href to logout route!!! */}
+      {/* Need to build user component */}
+        <li><a href="#">LG</a></li>
+        <li><CurrentUser currUser={ this.props.currUser }/></li>
+      </ul>
+    </header>
+  );
+
+
 }
+
 
 export default Header;

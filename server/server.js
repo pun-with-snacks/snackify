@@ -1,19 +1,21 @@
 const express = require('express');
-const authRoutes = require('./routes/auth-routes');
-const passportSetup = require('./config/passport-setup');
+const authRoutes = require('../routes/auth-routes');
+const passportSetup = require('../config/passport-setup');
 const path = require('path');
 const cors = require('cors');
 const pg = require('pg');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-const keys = require('./config/keys');
+const keys = require('../config/keys');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const app = express();
+
+
 const port = 3000; // @todo: update to be `process.env.PORT || 3000;` for external/heroku hosting
 const dbConfig = require('./db-config.js');
 
-app.use('/build', express.static(path.join(__dirname, 'build')));
+app.use('/build', express.static(path.join(__dirname, '../build')));
 // app.use('/public', express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,12 +48,12 @@ pool.connect((err, result) => {
 
   // TODO: should direct you to index.html if and only if you're logged in
 	app.get('/', (req, res) => {
-		if (req.user) res.sendFile(path.join(__dirname, 'index.html'));
+		if (req.user) res.sendFile(path.join(__dirname, '../index.html'));
 		else res.redirect('/login');
 	});
 
   app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
+    res.sendFile(path.join(__dirname, '../login.html'));
   })
 
   // NOTE:
