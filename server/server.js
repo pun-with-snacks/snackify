@@ -14,6 +14,7 @@ const app = express();
 
 const port = 3000; // @todo: update to be `process.env.PORT || 3000;` for external/heroku hosting
 const dbConfig = require('./db-config.js');
+const Controller = require('./controllers/controller');
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 // app.use('/public', express.static('public'));
@@ -54,7 +55,12 @@ pool.connect((err, result) => {
 
   app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '../login.html'));
-  })
+	});
+	
+	// @todo: hook these up (make these files / package.json)... ask about file heirarchy
+	app.post('/scrape', (req, res) => Controller.scrapeAll);
+	app.post('/parse', (req, res) => Controller.parseAll);
+	app.post('/clean', (req, res) => Controller.cleanAll);
 
   // NOTE:
 	app.post('/submission', (req, res) => {
