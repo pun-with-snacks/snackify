@@ -1,10 +1,8 @@
 CREATE TABLE "User" (
-	"_id" serial NOT NULL,
 	"gitHandle" TEXT NOT NULL UNIQUE,
+	"gitAvatar" bytea NOT NULL,
 	"votesRemaining" integer NOT NULL UNIQUE,
-	"electsRemaining" integer NOT NULL UNIQUE,
-	"isAdmin" BOOLEAN NOT NULL,
-	CONSTRAINT User_pk PRIMARY KEY ("_id")
+	CONSTRAINT User_pk PRIMARY KEY ("gitHandle")
 ) WITH (
   OIDS=FALSE
 );
@@ -14,54 +12,33 @@ CREATE TABLE "FoodItem" (
 	"foodName" TEXT NOT NULL,
 	" imgUrl" TEXT NOT NULL,
 	"price" FLOAT NOT NULL,
-	"comment" TEXT NOT NULL,
+	"itemVotes" integer NOT NULL,
+	"inCart" BOOLEAN NOT NULL,
 	CONSTRAINT FoodItem_pk PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE "AdminRules" (
-	"weeklyBudget" FLOAT NOT NULL,
-	"votesPerUser" integer NOT NULL,
-	"electsPerUser" integer NOT NULL,
-	"startTime" DATETIME NOT NULL,
-	"endTime" DATETIME NOT NULL
-) WITH (
-  OIDS=FALSE
-);
-
-CREATE TABLE "Comment" (
-	"_id" serial NOT NULL,
-	"userId" integer NOT NULL,
+CREATE TABLE "userToItem" (
 	"foodItemId" integer NOT NULL,
-	"weeklySessionId" integer NOT NULL,
-	"message" TEXT NOT NULL,
-	"messageOrder" integer NOT NULL,
-	CONSTRAINT Comment_pk PRIMARY KEY ("_id")
+	"firstVoterGitHandle" TEXT NOT NULL
 ) WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE "WeeklyHistory" (
-	"_id" serial NOT NULL,
-	"totalBudget" FLOAT NOT NULL,
-	CONSTRAINT WeeklyHistory_pk PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
-);
-
-CREATE TABLE "VotingStore" (
-	"_id" serial NOT NULL,
-	"weekId" integer NOT NULL,
-	"foodItemId" integer NOT NULL,
-	"firstVoterId" integer NOT NULL,
-	"totalVotes" integer NOT NULL,
-	CONSTRAINT VotingStore_pk PRIMARY KEY ("_id")
+CREATE TABLE "Admin" (
+	"gitHandle" serial NOT NULL,
+	"budget" FLOAT NOT NULL,
+	"userVotes" integer NOT NULL,
+	"startTime" integer NOT NULL,
+	"endTime" integer NOT NULL,
+	CONSTRAINT Admin_pk PRIMARY KEY ("gitHandle")
 ) WITH (
   OIDS=FALSE
 );
 
 
-ALTER TABLE "VotingStore" ADD CONSTRAINT "VotingStore_fk0" FOREIGN KEY ("weekId") REFERENCES "WeeklyHistory"("_id");
-ALTER TABLE "VotingStore" ADD CONSTRAINT "VotingStore_fk1" FOREIGN KEY ("foodItemId") REFERENCES "FoodItem"("_id");
-ALTER TABLE "VotingStore" ADD CONSTRAINT "VotingStore_fk2" FOREIGN KEY ("firstVoterId") REFERENCES "User"("_id");
+ALTER TABLE "userToItem" ADD CONSTRAINT "userToItem_fk0" FOREIGN KEY ("foodItemId") REFERENCES "FoodItem"("_id");
+ALTER TABLE "userToItem" ADD CONSTRAINT "userToItem_fk1" FOREIGN KEY ("firstVoterGitHandle") REFERENCES "User"("gitHandle");
+
+ALTER TABLE "Admin" ADD CONSTRAINT "Admin_fk0" FOREIGN KEY ("gitHandle") REFERENCES "User"("gitHandle");
