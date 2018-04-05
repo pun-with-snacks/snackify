@@ -14,6 +14,8 @@ const app = express();
 
 const port = 3000; // @todo: update to be `process.env.PORT || 3000;` for external/heroku hosting
 const dbConfig = require('./db-config.js');
+const Controller = require('./controllers/controller');
+
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 // app.use('/public', express.static('public'));
