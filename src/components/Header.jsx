@@ -11,6 +11,7 @@ const Header = props => {
       <ul>
       {/* need link href to logout route!!! */}
       {/* Need to build user component */}
+      {/* {console.log('Header props:', props)} */}
         <li><a href="#">{ props.gitHandle }</a></li>
         <li><CurrentUser gitHandle={ props.gitHandle } avatar={ props.avatar } /></li>
       </ul>

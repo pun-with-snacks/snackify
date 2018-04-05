@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       currUser: {
         gitHandle: 'back2bas1cs',
-        avatar: 'avatar'
+        avatar: 'avatar',
       }
     };
   };
@@ -44,8 +44,8 @@ class App extends Component {
   render () {
     return (
       <div>
-        <Header id='header' gitHandle={ this.currUser.gitHandle } avatar={ this.currUser.avatar } />
-        <Dashboard gitHandle={ this.state.currUser.gitHandle } } />
+        <Header id='header' gitHandle={ this.state.currUser.gitHandle } avatar={ this.state.currUser.avatar } />
+        {/* <Dashboard gitHandle={ this.state.currUser.gitHandle } /> */}
       </div>
     );
   };

@@ -41,13 +41,15 @@ class Dashboard extends Component {
 
   }
 
-  addItemToCart ()
+  addItemToCart() {
 
-  render () {
+  }
+
+  render() {
     return (
       <div>
-        <Cart cart={ this.state.cart } budget={ this.state.budget } gitHandle={ this.props.gitHandle }} />
-        <FoodBank bank={ this.state.bank } budget={ this.state.budget } />
+        <Cart cart={ this.state.cart } budget={ this.state.budget } gitHandle={ this.props.gitHandle } />
+        {/* <FoodBank bank={ this.state.bank } budget={ this.state.budget } /> */}
         {/* <SubmissionForm gitHandle={ this.state.gitHandle } /> */}
       </div>
     );
