@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <div>
         <Header id='header' gitHandle={ this.currUser.gitHandle } avatar={ this.currUser.avatar } />
-        <Dashboard gitHandle={ this.state.currUser.gitHandle } cart={ this.state.cart } bank={ this.state.bank } budget={ this.state.budget } />
+        <Dashboard gitHandle={ this.state.currUser.gitHandle } } />
       </div>
     );
   };

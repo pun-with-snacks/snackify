@@ -9,7 +9,7 @@ const Cart = props => {
 
   if (this.props.cart) {
     for (let i = 0; i < props.cart.length; i++) {
-      cartItems.push(<Item key={ i } item={ props.cart[i] } />);
+      cartItems.push(<Item key={ i } item={ props.cart[i] } gitHandle={ props.gitHandle } />);
     }
   } else {
     cartItems.push(<div></div>)
